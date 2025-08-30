@@ -1,0 +1,25 @@
+version: "3"
+services:
+  nuxt:
+    image: nuxt-pro-3
+    container_name: nuxtui3_template
+    ports:
+      - "3003:3000"
+    command: npm run dev
+    # command: ping 127.0.0.1
+    volumes:
+      - ./src/app:/app/app
+      - ./src/server:/app/server
+      - ./src/public:/app/public
+      - ./src/plugins:/app/plugins
+    restart: always
+    networks:
+      nuxt3-network:
+        ipv4_address: 172.32.13.2
+
+networks:
+  nuxt3-network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.32.13.0/24
